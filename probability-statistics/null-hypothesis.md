@@ -1,11 +1,25 @@
 # Statistics and Probability
 
 - [Statistics and Probability](#statistics-and-probability)
+  - [Displaying and describing quantitative data](#displaying-and-describing-quantitative-data)
+    - [Frequency Table and Dot plots](#frequency-table-and-dot-plots)
+    - [Histogram](#histogram)
+    - [Stem and Leaf Plot](#stem-and-leaf-plot)
+    - [Classifying shapes of distributions](#classifying-shapes-of-distributions)
+      - [Describing a distribution](#describing-a-distribution)
+  - [Categorical Data](#categorical-data)
+    - [Marginal and conditional distributions](#marginal-and-conditional-distributions)
   - [Probability](#probability)
     - [Statistical Significance of Experiment](#statistical-significance-of-experiment)
     - [Addition Rule for Probability](#addition-rule-for-probability)
     - [Multiplication Rule for Probability](#multiplication-rule-for-probability)
     - [Probability of at least one success](#probability-of-at-least-one-success)
+    - [Conditional probability and Independence](#conditional-probability-and-independence)
+  - [Statistics Intro: Mean, median and Mode](#statistics-intro-mean-median-and-mode)
+    - [Sample Variance](#sample-variance)
+    - [Why divide by n-1 for unbiased sample variance](#why-divide-by-n-1-for-unbiased-sample-variance)
+    - [Box and Whisker Plots](#box-and-whisker-plots)
+    - [Outliers](#outliers)
   - [Random Variables](#random-variables)
     - [Binomial Variables](#binomial-variables)
       - [binomial probability problem formula](#binomial-probability-problem-formula)
@@ -22,6 +36,85 @@
   - [Confidence Interval for Mean](#confidence-interval-for-mean)
     - [Chebyshev's inequality](#chebyshevs-inequality)
       - [General Definition](#general-definition)
+
+## Displaying and describing quantitative data
+
+### Frequency Table and Dot plots
+
+**frequency table** create a table that contains each distinct value and the frequency of its occurence
+
+Age | # at age
+---------|----------
+ 5 | 2
+ 6 | 1
+ 7 | 4
+
+**dot plot** create graph with values on the X and one dot at each x value (incrementally increases).
+
+**questions**  can be made
+
+- what is the range?
+- how many 7 year olds
+
+### Histogram
+
+Create buckets of values into categories and create a histogram.
+
+**interpreting a histogram** what can be determined?
+
+- total number of counts can be determined
+- number of counts greater than a certain value
+
+### Stem and Leaf Plot
+
+Stems contains all other digits other than the right most digits typically.
+
+
+Stem | Leaf
+---------|------
+ 0 | 0 0 2 4 7 7 9
+ 1 | 1 1 3 8
+ 2 | 0
+
+**how to interpret** can more easily see values.
+
+### Classifying shapes of distributions
+
+**symmetric** draw line in the center the look the same on both sides of split
+
+**left skewed** high points on the right tail on the left
+
+**right skewed** high points on the left tail on the right
+
+**bimodal** have two peaks
+
+**uniform** almost the same value throughout
+
+#### Describing a distribution
+
+Four things to comment:
+
+- shape of distribution
+- center of distribution: mean, median
+- spread: range, interquartile range, standard deviation, mean average deviation
+- outlier
+
+
+## Categorical Data
+
+**individuals** do not have to refer to people can be things.
+
+**identifier** how ot identify the individual
+
+**categorical variable** can take up a set number of values.
+
+**quantitative variables** many non-categorial variables
+
+### Marginal and conditional distributions
+
+**marginal distribution** data has two be bivariate (two variables). We are only interested in variables that appear in the "margins"
+
+**conditional distribution** is where we are only interested in a particular subpopulation of our entire data set. In rolling dice it could be in terms of rolling a 6 or rolling a two.
 
 ## Probability
 
@@ -55,7 +148,7 @@ In some cases, the first event happening impacts the probability of the second e
 
 NOTE: for indenpendent events:
 
-- $P(B \mid A) = P(B)
+- $P(B \mid A) = P(B)$
 
 ### Probability of at least one success
 
@@ -63,6 +156,96 @@ The following formulas can be used:
 
 - P(at least 1 successes) $=$ 1 - P(all failures)
 - P(at least 1 failure) $=$ 1 - P(all successes)
+
+### Conditional probability and Independence
+
+Two events $A$ and $B$ are independent if:
+
+$P(A \mid B) = P(A)\ and\ P(B)$
+
+and
+
+$P(B \mid A) = P(B)$
+
+NOTE: $\mid$ means "given. $P(A \mid B)$ can be read as "the probability that Event $A$ occurs Given Event $B$ has occured."
+
+Use independence with probabilities. Look at experimental results to see if independence holds. We test our assumption and assume that the events are independent if probabilities are significantly different. The measure of significantly different should be quantified statistically. Even though two events are dependent it does NOT mean that there is a causal relationship between the two.
+
+## Statistics Intro: Mean, median and Mode
+
+**descriptive** describe population with a small set of numbers
+
+**inferential** make judgements about the population based on samples in population
+
+**average** give me a typical or middle of values find the central tendency
+
+- arithmetic mean sum of all numbers divided by number of data points
+- median is looking for the middle of a series of numbers. If even number of numbers divide the arithmetic average of the two middle numbers. If odd it is the middle number. More robust to extreme values
+- mode the most common number of a data set. If the most typical number have the most. 
+
+**mean** the total distance from the mean to the data points below the mean is equal to the total distance from the mean to the data points above the mean
+
+**Impact of median and mean making the outlier much farther away** median does not get impacted. The mean is impacted more directly.
+
+**Impact of median and mean by removing outlier** removing low outlier will increase the mean; low outlier will decrease the mean. The median will likely increase by removing small outlier and decrease if removing a large outlier.
+
+**left skewed distribution** mean will be to the left of the median
+
+**right skewed distribution** mean will be to the right of the median
+
+**symmetric distribution** the mean and median will be close to one another
+
+**Interquartile Range** first figure out the median. Then find the middle of the first half and the middle of the second half. The interquartile range is the delta between the two middle points calculated.
+
+NOTE: if there are an even number of points for the median. The points used to calculated in the median will be used in calculating the right and left side of the IQR.
+
+### Sample Variance
+
+**unbiased sample variance** calculate the delta from the sample mean squared; divide by 1 less than the total number of samples.
+
+$S = \sqrt{\sigma_{i=1}^n(\frac{x_i - \bar{x})^2}{(n-1)}}$
+
+Taking the square root of the unbiased sample variance does not give an unbiased estimate for the sample standard deviation. The sqrt function is not non-linear.
+
+$\sigma = \sqrt{\sigma^2}$
+
+### Why divide by n-1 for unbiased sample variance
+
+**parameter** when we compute mean (etc) for the population
+
+- mean for population 
+  - $\mu = \frac{\Sigma_{i=1}^N X_i}{N}$
+- variance for population 
+  - $\sigma^2 = \frac{\Sigma_{i=1}^N (x_i -\mu)^2}{N}$ 
+
+**statistic** when the calculation is done for the mean (etc) of the sample
+
+- mean for sample
+  - $\bar{x} = \frac{\Sigma_{i=1}^n x_i}{n}$
+
+- biased sample variance
+  - $S_n^2 = \frac{\sum_{i=1}^{n} (x_i - \bar{x})^2}{n}$
+
+- unbiased sample variance
+  - $S_{n-1}^2 = \frac{\sum_{i=1}^{n} (x_i - \bar{x})^2}{n-1}$
+
+
+Why is dividing by n biased and n-1 is not? The mean could be outside of the samples. With N you are underestimating and with N-2 tend to over-estimate. On average N-1 works best.
+
+### Box and Whisker Plots
+
+1. first order the numbers to figure out the range
+1. whiskers for largest and smallest numbers
+1. middle line is the median value
+1. the median of the numbers of the bottom half is the first quartile
+1. the median of the numbers in the top half is the top of the second quartile
+
+### Outliers
+
+Statistical convention is to use the interquatile range to determine outlisers:
+
+- outlier $< Q_1 - 1.5 \times IQR$
+- outlier $> Q_3 + 1.5 \times IQR$
 
 ## Random Variables
 
