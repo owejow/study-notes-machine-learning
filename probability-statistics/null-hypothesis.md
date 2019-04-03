@@ -20,6 +20,8 @@
     - [Why divide by n-1 for unbiased sample variance](#why-divide-by-n-1-for-unbiased-sample-variance)
     - [Box and Whisker Plots](#box-and-whisker-plots)
     - [Outliers](#outliers)
+  - [Modeling Data Distributions](#modeling-data-distributions)
+    - [How parameters change as data is shifted and scaled](#how-parameters-change-as-data-is-shifted-and-scaled)
   - [Random Variables](#random-variables)
     - [Binomial Variables](#binomial-variables)
       - [binomial probability problem formula](#binomial-probability-problem-formula)
@@ -246,6 +248,35 @@ Statistical convention is to use the interquatile range to determine outlisers:
 
 - outlier $< Q_1 - 1.5 \times IQR$
 - outlier $> Q_3 + 1.5 \times IQR$
+
+## Modeling Data Distributions
+
+**percentile rank** two ways of calculating
+
+1. percentage of the data that is below amount in question
+1. percentage of the data that is at or below the amount in question
+
+**cumulative relative frequency graph** x shows the variable and y the cumulative relative frequency. The maximum value will have a y value 1.0. 
+
+- The median would be the **cumulative relative frequency** of 0.5
+- IQR can be calculated by subracting the 25th percentile from the 75th percentile
+
+**z-score** is the number of standard deviations for a particular data point away from the mean. Gives us a quick measure of how far away from the mean a given data is.
+
+- $z = \frac{x - \mu}{\sigma}$
+
+### How parameters change as data is shifted and scaled
+
+**median** and **mean** are affected as follows:
+
+- if A is added to every value the mean and median will increase by A
+- if A is multipled by every value the mean and median will be multiplied by A
+
+**StdDev** and **IQR** is affected should be as follows
+
+- if A is added to every value the standard deviation does not change
+- if A is multiplied by every value both IQR and stddev are scaled
+
 
 ## Random Variables
 
