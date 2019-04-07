@@ -20,8 +20,16 @@
     - [Why divide by n-1 for unbiased sample variance](#why-divide-by-n-1-for-unbiased-sample-variance)
     - [Box and Whisker Plots](#box-and-whisker-plots)
     - [Outliers](#outliers)
+  - [Making and describing scatter plots](#making-and-describing-scatter-plots)
+    - [Correlation coefficient](#correlation-coefficient)
+    - [Residuals](#residuals)
+      - [R-squared intuition](#r-squared-intuition)
+      - [R-squared or coefficient of determinination](#r-squared-or-coefficient-of-determinination)
+      - [Standard deviation of residuals or root mean squared deviation (RMSD)](#standard-deviation-of-residuals-or-root-mean-squared-deviation-rmsd)
   - [Modeling Data Distributions](#modeling-data-distributions)
     - [How parameters change as data is shifted and scaled](#how-parameters-change-as-data-is-shifted-and-scaled)
+    - [Density Curves](#density-curves)
+      - [What can we glean from density curves](#what-can-we-glean-from-density-curves)
   - [Random Variables](#random-variables)
     - [Binomial Variables](#binomial-variables)
       - [binomial probability problem formula](#binomial-probability-problem-formula)
@@ -249,12 +257,134 @@ Statistical convention is to use the interquatile range to determine outlisers:
 - outlier $< Q_1 - 1.5 \times IQR$
 - outlier $> Q_3 + 1.5 \times IQR$
 
+## Making and describing scatter plots
+
+**scatterplots** darawn to see relationships between variables. Used to determine if two variables have positive or negative relationship.
+
+**bivariate** plot a relationship between two variables.
+
+- describe the relationship as linearity and strength, and direction
+  - negative, strong, linear relationship
+  - positive, weak, linear relationship
+  - negative, strong, non-linear relationship
+
+Describe a relationship in terms of:
+
+- form: is the association linear or nonlinear
+- direction: is the association positive or negative
+- strength: does the association appear to be strong, moderately strong, or weak
+- outliers: do there appear to be any data points that are unusually far away from the general pattern
+
+### Correlation coefficient
+
+**correlation coefficient** formula is the foollowing
+
+- $r = \frac{1}{(n-1)} \sum_{i=1}^{n}(\frac{x_i-\bar{x}}{s_x})\frac{(y_i-\bar{y})}{s_y}%$
+- $-1 \le r \le 1$
+
+- linear regression line goes through the mean of x and the y
+
+**Pearson correlation** coefficient is the measure of linear correlation between +1 and -1.
+
+- Cauchy-Schwartz inequality the value is bounded by -1 and +1
+
+### Residuals
+
+**linear regression** fit a line to minimize the square distance to the points.
+
+- residual = actual - estimated
+- $y - \hat{y}$
+- residuals can be positive or negative
+
+**least squares regression** tries to minimize the distance between the data points and the regression line.
+
+- $\hat{y} = m{x} + b$
+- $m = r\frac{S_y}{S_x}$
+- the line goes through the mean
+
+**slope interpretation** on average how much does the dependent variable increase for each increment of the independent variable
+
+**bias interpretation** what is the base dependent variable value if the independent variable is 0
+
+**residual plot** gives a sense of how good a fit the line is for the data. There should be no visible trend for the residuals for a good fit. If the plot is not evenly scattered and has a pattern a more non-linear.
+
+first calculate the residuals:
+
+- residual =  actual - expected
+
+#### R-squared intuition
+
+**r-squared** measures how much prediction herror is eliminated when we use least squares regression.
+
+- without regression would use the average of y values to predict the corresponding x value.
+- the sum of square of the residuals gives a sense of how good a fit the line is
+- $R^2$ tells us what percent of the prediction error in the y variable is eliminated when we use least-squares regression on the x-variable
+- $R^2$ is called the coefficient of determination
+- $R^2$ tells us what percentage of the variability in the y variable is accounted for by the regression on the x variable.
+
+#### R-squared or coefficient of determinination
+
+- what percent of the variation in y is described by the variation in x?
+
+- $1 - \frac{SE_{line}}{SE_{\bar{y}}}$
+- its called $R^2$ or coefficient of determination
+
+total variation in y:
+
+- $SE_{\bar{y}} = (y_1 - \bar{y})^2 + (y_2 - \bar{y})^2 + ... + (y_n - \bar{y})^2$
+
+how much of the variation is not described by the line
+
+- $SE_{line} = (y_1 - (mx_1 -b))^2 + (y_2 - (mx_2 -b))^2 + ... + (y_n - (mx_n -b))^2$
+
+#### Standard deviation of residuals or root mean squared deviation (RMSD)
+
+**standard deviation of residuals** are a measure of how well a regression line fits the data. It is also known as the root mean square deviation or root mean square error
+
+- $RMSD = \sqrt{\frac{\sum (residuals)^2}{n-2}}$
+- The RMSD units are whatever they are for the y-axis (average prediction area)
+- approximate size of the average error
+
+- $\hat{y} = mx + b$
+- $Constant gives b$
+- $coefficient on x gives slope$
+- $S$ is the standard deviation of residuals
+- slope will tell if $R^2$ is positive or negative
+
+
+Predictor     | Coef | SE Coef | T       | P
+--------------|-------|---------|--------|--------
+Constant      | 2.544 | 0.134   | 18.955 | 0.000
+Caffein (mg)  | 0.163 | 0.057   |  2.862 | 0.005
+
+S=1.532 R-Sq = 60.032$\%$ R-Sq(adj) = 58.621$\%/$
+
+- equation for the regression line
+  - $\hat{y} = 2.544 + 0.164x$ where x represents caffeine intake and y represents hours spent studying
+
+- The standard deviation of the residuals, or $S$, measures the size of a typical prediction error in y variable. so the units of $S$ match the units on the y-variable, which is hours in this context.
+
+- what percentage of the variation in study time can be explained by the regression caffeine intake?
+- the coefficient of determination or $R^2$ measures what percentag eof the variation of y variable can be explained by the regression on the x variable.
+
+Even with moderately strong positive relationship, we cannot say that caffeine is the cause of the longer study times. 
+
+Another variable -- like a student needing to pass this course to graduate -- might be the cause of both increased study time and caffeine consumption.
+
+Reverse causation is also possible. instead of caffeine causing longer study times, maybe its the need to study longer that caused increased caffeine intake.
+
+**Association does not necessarily imply causation** important to remmeber
+
+#### Impact of removing outliers on regression lines
+
+
+
 ## Modeling Data Distributions
 
 **percentile rank** two ways of calculating
 
 1. percentage of the data that is below amount in question
-1. percentage of the data that is at or below the amount in question
+2. percentage of the data that is at or below the amount in question
 
 **cumulative relative frequency graph** x shows the variable and y the cumulative relative frequency. The maximum value will have a y value 1.0. 
 
@@ -276,6 +406,27 @@ Statistical convention is to use the interquatile range to determine outlisers:
 
 - if A is added to every value the standard deviation does not change
 - if A is multiplied by every value both IQR and stddev are scaled
+
+### Density Curves
+
+**density curve** area under density curve sums to 1. Values are continuous and bins are infinitely small.
+
+- density curve is that the probability of a precise value is zero. The area under the curve is zero for a single point
+
+#### What can we glean from density curves
+
+**median** for symmetric distribution is the mid point for a density curve. Mean and median are the same
+
+- for non-symmetric regions the line has to divide the area in two equal 50 percent distributions
+
+**skewed** distribution are those that the mean and median are not the same. The mean to the right of the median is called a right-skewed distribution. The mean to the left of a median is called a left-skewed distribution.
+
+**normal distribution** probabilities
+
+- $\mu \pm 1\sigma = 68\%$
+- $\mu \pm 2\sigma = 95\%$
+- $\mu \pm 3\sigma = 99.7\%$
+
 
 
 ## Random Variables
