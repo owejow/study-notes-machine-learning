@@ -15,17 +15,23 @@
     - [Multiplication Rule for Probability](#multiplication-rule-for-probability)
     - [Probability of at least one success](#probability-of-at-least-one-success)
     - [Conditional probability and Independence](#conditional-probability-and-independence)
+    - [Conditional probability formula](#conditional-probability-formula)
   - [Statistics Intro: Mean, median and Mode](#statistics-intro-mean-median-and-mode)
     - [Sample Variance](#sample-variance)
     - [Why divide by n-1 for unbiased sample variance](#why-divide-by-n-1-for-unbiased-sample-variance)
     - [Box and Whisker Plots](#box-and-whisker-plots)
     - [Outliers](#outliers)
+  - [Study Design](#study-design)
+    - [Sampling and observational Studies](#sampling-and-observational-studies)
+    - [Techniques for Simple Random Sample](#techniques-for-simple-random-sample)
+    - [Types of Statistical Studies](#types-of-statistical-studies)
   - [Making and describing scatter plots](#making-and-describing-scatter-plots)
     - [Correlation coefficient](#correlation-coefficient)
     - [Residuals](#residuals)
       - [R-squared intuition](#r-squared-intuition)
       - [R-squared or coefficient of determinination](#r-squared-or-coefficient-of-determinination)
       - [Standard deviation of residuals or root mean squared deviation (RMSD)](#standard-deviation-of-residuals-or-root-mean-squared-deviation-rmsd)
+      - [Impact of removing outliers on regression lines](#impact-of-removing-outliers-on-regression-lines)
   - [Modeling Data Distributions](#modeling-data-distributions)
     - [How parameters change as data is shifted and scaled](#how-parameters-change-as-data-is-shifted-and-scaled)
     - [Density Curves](#density-curves)
@@ -43,7 +49,13 @@
   - [Outcomes, Events, and Probability](#outcomes-events-and-probability)
   - [Central Limit Theorem](#central-limit-theorem)
     - [Useful hints](#useful-hints)
-  - [Confidence Interval for Mean](#confidence-interval-for-mean)
+  - [Sampling Distributions](#sampling-distributions)
+    - [Sampling Distribution and Sample Proportion](#sampling-distribution-and-sample-proportion)
+    - [Finding the mean and standard deviation of the sampling distribution](#finding-the-mean-and-standard-deviation-of-the-sampling-distribution)
+    - [Sampling distribution of a sample mean](#sampling-distribution-of-a-sample-mean)
+  - [Confidence Interval](#confidence-interval)
+    - [Assumptions about confidence intervals](#assumptions-about-confidence-intervals)
+    - [Conditions for Inference on a proportion](#conditions-for-inference-on-a-proportion)
     - [Chebyshev's inequality](#chebyshevs-inequality)
       - [General Definition](#general-definition)
 
@@ -130,6 +142,7 @@ Four things to comment:
 
 **large of large numbers** experimental probability is more likely to converge to the theoretical value with more trials
 
+
 ### Statistical Significance of Experiment
 
 **control group** vs **treatment group** what is the probability that the control group and treatment group have differnt means?
@@ -171,7 +184,7 @@ The following formulas can be used:
 
 Two events $A$ and $B$ are independent if:
 
-$P(A \mid B) = P(A)\ and\ P(B)$
+$P(A \mid B) = P(A)\ \cap P(B)$
 
 and
 
@@ -180,6 +193,11 @@ $P(B \mid A) = P(B)$
 NOTE: $\mid$ means "given. $P(A \mid B)$ can be read as "the probability that Event $A$ occurs Given Event $B$ has occured."
 
 Use independence with probabilities. Look at experimental results to see if independence holds. We test our assumption and assume that the events are independent if probabilities are significantly different. The measure of significantly different should be quantified statistically. Even though two events are dependent it does NOT mean that there is a causal relationship between the two.
+
+### Conditional probability formula
+
+$P(A \mid B) = \frac{P(A \cap B)}{P(B)}$
+
 
 ## Statistics Intro: Mean, median and Mode
 
@@ -256,6 +274,68 @@ Statistical convention is to use the interquatile range to determine outlisers:
 
 - outlier $< Q_1 - 1.5 \times IQR$
 - outlier $> Q_3 + 1.5 \times IQR$
+
+## Study Design
+
+### Sampling and observational Studies
+
+- Response bias: Response bias is when people are systematically dishonest when answering a question.
+- undercoverage: undercoverage is when the researcher excludes members of the population from being in the sample.
+- voluntary response sampling: respondents that voluntarily respond are not indicative of the overall population
+- convenience sampling: when you sample the subpopulation who are easy to reach out to
+- Nonresponse is when people chosen for the sample cannot be reached or refuse to participate
+- Undercoverage is when the researcher systematically excludes members of the population from being in the sample.
+- Biased wording of survey questions can cause people to favor certain responses over others.
+
+**random digit table** used to create samples. Print out digits and walk the digits.
+
+### Techniques for Simple Random Sample
+
+- simple random sample: every member of population has same probability of being selected
+- stratified sample: take population and stratify it by subgroups then sample within each of the subgroups.
+- cluster sample: select all members of certain subgroups of a population
+- voluntary: has an excellent chance of bias
+- convenience: take samples of those who are most convenient to sample
+- bias wording could cause a bias
+- response bias: people do not want to respond at all
+
+### Types of Statistical Studies
+
+**Sample Study** estimate the parameter population based on randomly sampling people from the population. 
+
+**Observational Study** understand if two parameters in a population are related to one another. Do those two variables move together? This does not indicate causality. There could be a lurking variable or a confounding variable that results in the correlation.
+
+- In an observational study, we measure or survey members of a sample without trying to affect them.
+
+**Experiment** basis of the scientific method. They establish causality. select samples, randomly assign the people to control and treatment. Then measure affect on individuals. Want to randomly distribute the confounding variable in the control and treatment groups.
+
+- In a controlled experiment, we assign people or things to groups and apply some treatment to one of the groups, while the other group does not receive the treatment.
+
+- A comparative experiment involves one group receiving a treatment (the insoles) and another group that doesn't receive the treatment. The group that doesn't receive the treatment is called the control group.
+
+**explanatory variable** variable that causes something to change.
+
+**response variable** the thing that might get changed by the explanatory variable
+
+**randomized block design**, the experimenter divides subjects into subgroups called blocks, such that the variability within blocks is less than the variability between blocks. Then, subjects within each block are randomly assigned to treatment conditions. Compared to a completely randomized design, this design reduces variability within treatment conditions and potential confounding, producing a better estimate of treatment effects.
+
+**double blind** and **blind** and **triple blind** experiments. blind the people don't know. double blind the people who administer don't know. triple blind the people who are analyzing the experiments don't know.
+
+**treatment** is the specific level of the explanatory variable given to individuals in an experiment. If there are multiple explanatory variables, a treatment is a combination of specific levels from each explanatory variable.
+
+**experimental** unit is who or what we are assigning to a treatment.
+
+**Key idea:** If a sample isn't randomly selected, it may not be representative of the larger population.
+
+ "" | Random sampling | Not Random Sampling
+---------|-----------------|---------
+ Random Assignment | Can determine causal relationship in population. This design is relatively rare in the real world. | Can determine causal relationship in that sample only. This design is where most experiments would fit.
+ No random assignment | Can detect relationships in population, but cannot determine causality. This design is where many surveys and observational studies would fit.| Can detect relationships in that sample only, but cannot determine causality. This design is where many unscientific surveys and polls would fit.
+
+**matched pair design** control and treatment groups get swapped over time to see what happens. Everyone is both in the control and treatment to reduce affect of lurking variables.
+
+- matched pairs design is a special case of a randomized block design. It can be used when the experiment has only two treatment conditions; and subjects can be grouped into pairs, based on some blocking variable. Then, within each pair, subjects are randomly assigned to different treatments.
+
 
 ## Making and describing scatter plots
 
@@ -427,10 +507,7 @@ Reverse causation is also possible. instead of caffeine causing longer study tim
 - $\mu \pm 2\sigma = 95\%$
 - $\mu \pm 3\sigma = 99.7\%$
 
-
-
 ## Random Variables
-
 
 ### Binomial Variables
 
@@ -470,67 +547,71 @@ $P(exact\_num) = \binom{n}{exact\_num} p^{exact\_num} (1-p)^{(n-exact\_num)}$
 
 #### Expected Value and Variance of a binomial variable
 
-* $X$ is number of successes after n trials where $P(success)$ for each trial is $p$. 
-  * The expected value is provided below
-    * $E(X) = np$
-  * The expected variance of a binomial variable
-    * $Var(X) =  np(1-p)$
+- $X$ is number of successes after n trials where $P(success)$ for each trial is $p$.
+
+- The expected value is provided below
+  - $E(X) = np$
+  - The expected variance of a binomial variable
+  - $Var(X) =  np(1-p)$
 
 ### Geometric Random Variables
 
 Requirements for geometric rnadom variables
 
-* trial outcome is success or failure
-* trial results are independent
-* same probability on each trial
-* number of successes in finite number of trials (not fixed number of trials)
+- trial outcome is success or failure
+- trial results are independent
+- same probability on each trial
+- number of successes in finite number of trials (not fixed number of trials)
 
 #### Proof Geometric Random Variables
 
 $X$ is equal to number of independent trials to a get a "sucess" where $P(success)$ for each trial is $p$
 
-* $E(X) = \frac{1}{p}$
+- $E(X) = \frac{1}{p}$
 
 ### Continuous Random Variables
 
-* what happens to $\mu_{Y}$ and $\sigma_{Y}$ relative to $\mu_{X}$ and $\sigma{Y}$ if $X$ and $Y$ are continuous variables and $K
-  * if $Y$ = $X$ + $k$
-    * $\mu_Y = \mu_{X} + k$
-    * $\sigma_Y = \sigma_{X}$
-  * if $Y$ =  $kX$
-    * $\mu_Y = k\mu_{X}$
-    * $\sigma_Y = k\sigma_{X}$
+- what happens to $\mu_{Y}$ and $\sigma_{Y}$ relative to $\mu_{X}$ and $\sigma{Y}$ if $X$ and $Y$ are continuous variables and $K
+  - if $Y$ = $X$ + $k$
+    - $\mu_Y = \mu_{X} + k$
+    - $\sigma_Y = \sigma_{X}$
+  - if $Y$ =  $kX$
+    - $\mu_Y = k\mu_{X}$
+    - $\sigma_Y = k\sigma_{X}$
 
-* if $X$ and $Y$ **independent** random variables:
-  * $Var(X \pm Y) = Var(X) + Var(Y)$
+- if $X$ and $Y$ **independent** random variables:
+  - $Var(X \pm Y) = Var(X) + Var(Y)$
 
 #### Sums and Differences of Random Variables
 
-* $X$ and $Y$ are independent random variables
-  * $E(X) = \mu_x$
-  * $E(Y) = \mu_y$
-  * $Var(X) = E((X-\mu_x)^2) = \sigma^2$
-  * Addition:
-    * $Z = X + Y$
-    * $E(Z) = E(X+Y) = E(X) + E(Y)$
-    * $Var(Z) = Var(X) + Var(Y)$
-    * $\sigma_{Z}^2 = \sigma_{X}^2 + \sigma_{Y}^2$
-  * Subtraction:
-    * $A = X - Y$
-    * $E(A) = E(X-Y) = E(X) - E(Y)$
-    * $Var(A) = Var(X) + Var(Y)$
-    * $\sigma_{A}^2 = \sigma_{X}^2 + \sigma_{Y}^2$
-  
-* useful:
-  * $\sigma_{-Y}^2$ = \sigma_{Y}^2
+- $X$ and $Y$ are independent random variables
+  - $E(X) = \mu_x$
+  - $E(Y) = \mu_y$
+  - $Var(X) = E((X-\mu_x)^2) = \sigma^2$
+  - Addition:
+    - $Z = X + Y$
+    - $E(Z) = E(X+Y) = E(X) + E(Y)$
+    - $Var(Z) = Var(X) + Var(Y)$
+    - $\sigma_{Z}^2 = \sigma_{X}^2 + \sigma_{Y}^2$
+  - Subtraction:
+    - $A = X - Y$
+    - $E(A) = E(X-Y) = E(X) - E(Y)$
+    - $Var(A) = Var(X) + Var(Y)$
+    - $\sigma_{A}^2 = \sigma_{X}^2 + \sigma_{Y}^2$
+
+- useful:
+  - $\sigma_{-Y}^2 = \sigma_{Y}^2$
+  - $E(aX+b) = aE(X) + b$
+  - $\mathit{Var}(aX+b) = a^2\mathit{Var}(X)$
+  - $\sigma(aX+b) = a\sigma(X)$
 
 #### Combining Random Variables
 
-* Make sure that variables are independent or that it's reasonable to assume independence, before combining variances
+- Make sure that variables are independent or that it's reasonable to assume independence, before combining variances
 
-* Even when we subtract two random variables, we still add their variances; subtracting two variables increases the overall variability in the outcomes
+- Even when we subtract two random variables, we still add their variances; subtracting two variables increases the overall variability in the outcomes
 
-* Standard deviation of the combined distributions is the same as taking the sqare root of the combined variances
+- Standard deviation of the combined distributions is the same as taking the sqare root of the combined variances
 
 Assuming $X$ and $Y$ are independent of eachother:
 
@@ -541,23 +622,23 @@ Assuming $X$ and $Y$ are independent of eachother:
 
 ## Combining Random Variables
 
-* Expected mean of a sum of variables is the sum of the individual means
-  * $E(X+Y) = \mu_{X+Y} = \mu_X - \mu_Y$
-  * $E(X-Y) = \mu_{X-Y} = \mu_X - \mu_Y$
+- Expected mean of a sum of variables is the sum of the individual means
+  - $E(X+Y) = \mu_{X+Y} = \mu_X - \mu_Y$
+  - $E(X-Y) = \mu_{X-Y} = \mu_X - \mu_Y$
   
-* Expected variance of a sum of variables is the sum of the individual means. Assumes $X, Y$ is independent
-  * $Var(X + Y) = Var(X) + Var(Y)$
-  * $Var(X - Y) = Var(X) - Var(Y)$
+- Expected variance of a sum of variables is the sum of the individual means. Assumes $X, Y$ is independent
+  - $Var(X + Y) = Var(X) + Var(Y)$
+  - $Var(X + Y) = Var(X) + Var(Y)$
 
-* **Variance** is defined as the average squared difference from the mean
-* **standard deviation** is the square root of the variance
+- **Variance** is defined as the average squared difference from the mean
+- **standard deviation** is the square root of the variance
 
 ## Outcomes, Events, and Probability
 
-* **outcomes** of experiments is how we model random or unpredictable phenomena 
-* **outcomes** are elements of a **sample space** $\Omega$
-* **events** are subsets of $\Omega$
-* **events** are assigned a probability, a number between 0 and 1
+- **outcomes** of experiments is how we model random or unpredictable phenomena 
+- **outcomes** are elements of a **sample space** $\Omega$
+- **events** are subsets of $\Omega$
+- **events** are assigned a probability, a number between 0 and 1
 
 ## Central Limit Theorem
 
@@ -583,19 +664,132 @@ Three components of **central limit theorem**:
 
 * In any normal distribution, we know that approximately $68\%$, of the data falls within one standard deviation of the mean, $95\%$, of data falls within two standard deviations of the mean, and $99.7\%$ of data falls within three standard deviations of the mean.
 
-## Confidence Interval for Mean
 
-* **confidence interval** transform data into a range of plausible values for a given parameter
-  * quantify confidence in provided estimate
+## Sampling Distributions
+
+### Sampling Distribution and Sample Proportion
+
+Determining if a sample distribution of $\hat{p}$ is approximately normal:
+
+
+NOTE: the sampling distribution is approximately normal as long as the expected number of successes and failures are both at least 10.
+
+- $np \ge 10 \cap n (1-p)$
+
+### Finding the mean and standard deviation of the sampling distribution
+
+If repeated random samples of a given size n are taken from a population of values for a categorical variable, where the proportion in the category of interest is p, then the mean of all sample proportions (p-hat) is the population proportion (p). The sampling distribution of a sample proportion $\hat{p}$ has:
+
+- $\mu_{\hat{p}} = p$
+- $\sigma_{\hat{p}} = \sqrt{\frac{p(1-p)}{n}}$
+  - NOTE: for this standard deviation formula to be accurate, our sample size needs to be 10\% or less of the population so we can assume independence.
+  - Since the sample size n appears in the denominator of the square root, the standard deviation does decrease as sample size increases. Finally, the shape of the distribution of p-hat will be approximately normal as long as the sample size n is large enough. The convention is to require both np and n(1 – p) to be at least 10.
+
+### Sampling distribution of a sample mean
+
+**Central Limit Theorem** (CLT) is a statistical theory states that given a sufficiently large sample size from a population with a finite level of variance, the mean of all samples from the same population will be approximately equal to the mean of the population.
+
+Parameters are usually unknown, because it is impractical or impossible to know exactly what values a variable takes for every member of the population.
+
+Statistics are computed from the sample, and vary from sample to sample due to sampling variability.
+
+Sampling Distribution of the Sample mean:
+
+- sampling distribution is 
+
+**skew**  is the degree of distortion from the symmetrical bell curve or the normal distribution. It measures the lack of symmetry in data distribution. It differentiates extreme values in one versus the other tail. A symmetrical distribution will have a skewness of 0.
+
+Kurtosis is all about the tails of the distribution — not the peakedness or flatness. It is used to describe the extreme values in one versus the other tail. It is actually the measure of outliers present in the distribution.
+
+- High kurtosis in a data set is an indicator that data has heavy tails or outliers. If there is a high kurtosis, then, we need to investigate why do we have so many outliers. It indicates a lot of things, maybe wrong data entry or other things. Investigate!
+- Low kurtosis in a data set is an indicator that data has light tails or lack of outliers. If we get low kurtosis(too good to be true), then also we need to investigate and trim the dataset of unwanted results.
+
+Positive Skewness means when the tail on the right side of the distribution is longer or fatter. The mean and median will be greater than the mode.
+
+Negative Skewness is when the tail of the left side of the distribution is longer or fatter than the tail on the right side. The mean and median will be less than the mode.
+
+variance of the sampling distribution of the sample mean:
+
+- $\sigma^2_{\bar{x}} = \frac{\sigma^2}{n}$
+
+mean of sampling distribution of sample mean
+
+- $\mu_{\bar{x}} = \mu$
+- NOTE: for this standard deviation formula to be accurate, our sample size needs to be $10\%$ or less of the population so we can assume independence.
+
+- When the sample size is small ($n\lt 30$), the sampling distribution of the sample mean will have a similar shape to the population, and we were told this population is left-skewed.
+
+## Confidence Interval
+
+Standard error for sampling proportion $\hat{p}$:
+
+- $SE_{\hat{p}} = \sqrt{\frac{\hat{p}(1-\hat{p})}{n}}$
+
+Margin of error: reduced by increasing sample size.
+
+The confidence level refers to the long-term success rate of the method, that is, how often this type of interval will capture the parameter of interest.
+
+A specific confidence interval gives a range of plausible values for the parameter of interest.
+
+A larger margin of error produces a wider confidence interval that is more likely to contain the parameter of interest (increased confidence).
+
+### Assumptions about confidence intervals
+
+Trying to estimate population parameter based on sample. Using the sample proportion we use a confidence interval on the sample proportion.
+
+Conditions assumed:
+
+- Random Sample (take great care)
+- Normal condition must hold. Sampling distribution of sample proportions must be roughly normal. The rule of thumb is that per sample with more than 10 successes and failures each. Look at our sample to see if we have greater than 10 successes and failures.
+- Independence condition 10% rule: if sampling without replacement. Sample n must be less than 10% of the population.
+
+### Conditions for Inference on a proportion
+
+When we want to carry out inferences on one proportion (build a confidence interval or do a significance test), the accuracy of our methods depend on a few conditions. Before doing the actual computations of the interval or test, it's important to check whether or not these conditions have been met, otherwise the calculations and conclusions that follow aren't actually valid.
+
+The conditions we need for inference on one proportion are:
+
+- Random: The data needs to come from a random sample or randomized experiment.
+- Normal: The sampling distribution of $\hat{p}$ needs to be approximately normal 
+- needs at least 10 expected successes and 10 expected failures. 
+- Independent: Individual observations need to be independent. If sampling without replacement, our sample size shouldn't be more than 10, percent of the population.
+
+**Random Condition** Random samples give us unbiased data from a population. When samples aren't randomly selected, the data usually has some for of bias, so using data that wasn't randomly selected to make inferences about its population can be risky. More specifically, sample proportions are unbiased estimators of their population proportion. This won't happen if samples isn't randomly selected.
+
+**the normal condition** sampling distribution of $\hat{p}$ is approximately normal as long as the expected number of successes and failures are both at least 10. This happens when our sample size n is reasonably large. 
+
+- expected successes: $np \ge 10$
+- expected failures: $n(1-p) \ge 10$
+
+When building confidence interval, we can count the number of successes and failures in the sample data to amke sure they are both at least 10. 
+
+**independence condition** the individual observations need to be independent. When we are sampling without replacement individual observations aren't technically independent since removing each item changes the population.
+
+If we sample 10\% or less of a population we can treat individual observations as independent. 
+
+If the above conditions holds we can use the formula for the standard deviation of $\hat{p}$
+
+$\sigma_{\hat{p}} = \sqrt{\frac{p(1-p)}{n}}$
+
+WHen building the confidence interval for p we don't know what p is. We substitute $\hat{p}$ as an estimator for p. When we do this, we call it the standard error of $\hat{p}$ to distinguish it from the standard deviation.
+
+So our formula for standard error of $\hat{p}$ is
+
+$\sigma_{\hat{p}} \approx \sqrt{\frac{\hat{p}(1-\hat{p})}{n}}$
+
+
+
+- **confidence interval** transform data into a range of plausible values for a given parameter
+  - quantify confidence in provided estimate
 
 Estimators for distribution features:
 
-* $\mu$  : sample mean
-* $\sigma^2$ : sample variance
-* $T$ is an estimator for unknown paramber $\theta$
-  * **point estimate**: is the estimated for a given sample
+- $\mu$  : sample mean
+- $\sigma^2$ : sample variance
+- $T$ is an estimator for unknown paramber $\theta$
+  - **point estimate**: is the estimated for a given sample
 
-* **confidence statements** are made about unknown parameters based on sampling distribution estimators.
+- **confidence statements** are made about unknown parameters based on sampling distribution estimators.
 
 ### Chebyshev's inequality
 
@@ -603,18 +797,18 @@ With a probability of $75\%$ the estimator of $T$ is within $2\sigma_T$:
 
 $P(|T - \theta| < 2\sigma_T)  > \frac{3}{4}$
 
-* **random variable** $T$ in a **fixed interval**
+- **random variable** $T$ in a **fixed interval**
 $T \in (\theta - \sigma_T, \theta + \sigma_T)$ with probability of $75\%$
 
-* **random interval** covers a fixed but known $theta$
+- **random interval** covers a fixed but known $theta$
 
 $\theta \in (T - \sigma_T, T + \sigma_T)$ with probability of $75\%$
 
 **confidence interval** only involves an unbiased estimator and knowlege of the standard deviation
-
 
 #### General Definition
 
 Example definition:
 
 $(t - c\sigma_T, t + c\sigma_T)$
+
