@@ -56,8 +56,32 @@
   - [Confidence Interval](#confidence-interval)
     - [Assumptions about confidence intervals](#assumptions-about-confidence-intervals)
     - [Conditions for Inference on a proportion](#conditions-for-inference-on-a-proportion)
+    - [t-statistic](#t-statistic)
+      - [Confidence for inference on mean](#confidence-for-inference-on-mean)
+        - [random condition**](#random-condition)
+        - [**the normal condition**](#the-normal-condition)
+      - [**The independence condition**](#the-independence-condition)
+      - [**Summary**](#summary)
+      - [Confidence interval for Mean](#confidence-interval-for-mean)
+      - [Interpreting a confidence interval for a mean](#interpreting-a-confidence-interval-for-a-mean)
+      - [Sample size for a given margin of error for a mean](#sample-size-for-a-given-margin-of-error-for-a-mean)
     - [Chebyshev's inequality](#chebyshevs-inequality)
+      - [Making a t-interval for paired data](#making-a-t-interval-for-paired-data)
+      - [Formula for test statistic](#formula-for-test-statistic)
       - [General Definition](#general-definition)
+  - [Significant Tests](#significant-tests)
+    - [The idea of significance tests](#the-idea-of-significance-tests)
+      - [Significance Levels](#significance-levels)
+      - [Type I errors and Type II errors](#type-i-errors-and-type-ii-errors)
+        - [Power in Significance Test](#power-in-significance-test)
+        - [Consequences of errors and significance](#consequences-of-errors-and-significance)
+      - [Testing hypothesis about a proportion](#testing-hypothesis-about-a-proportion)
+        - [The random condition](#the-random-condition)
+        - [The Normal Condition](#the-normal-condition)
+        - [The independence condition](#the-independence-condition)
+        - [Calculating a z-statistic in a test about proportion](#calculating-a-z-statistic-in-a-test-about-proportion)
+      - [Condition for t test about a mean](#condition-for-t-test-about-a-mean)
+      - [When to use the z or t statistic in significance tests](#when-to-use-the-z-or-t-statistic-in-significance-tests)
 
 ## Displaying and describing quantitative data
 
@@ -761,7 +785,7 @@ The conditions we need for inference on one proportion are:
 - expected successes: $np \ge 10$
 - expected failures: $n(1-p) \ge 10$
 
-When building confidence interval, we can count the number of successes and failures in the sample data to amke sure they are both at least 10. 
+When building confidence interval, we can count the number of successes and failures in the sample data to amke sure they are both at least 10.
 
 **independence condition** the individual observations need to be independent. When we are sampling without replacement individual observations aren't technically independent since removing each item changes the population.
 
@@ -777,7 +801,9 @@ So our formula for standard error of $\hat{p}$ is
 
 $\sigma_{\hat{p}} \approx \sqrt{\frac{\hat{p}(1-\hat{p})}{n}}$
 
+**margin of error** is the expression on the other side of the $\pm$
 
+- $\hat{p} \pm z^*\frac{\sqrt{\hat{p}(1-\hat{p}}}{n}$
 
 - **confidence interval** transform data into a range of plausible values for a given parameter
   - quantify confidence in provided estimate
@@ -790,6 +816,86 @@ Estimators for distribution features:
   - **point estimate**: is the estimated for a given sample
 
 - **confidence statements** are made about unknown parameters based on sampling distribution estimators.
+
+### t-statistic
+
+Used to estimate the confidence interval for means from samples.
+
+- samples must be random
+- the sampling distribution of $\bar{x}$ is approximately normatl
+  - $n \ge 30$ or original distribution is normal
+  - individual observations can be considered independent
+    - $n \le 10\%$
+
+#### Confidence for inference on mean
+
+The conditions are:
+
+- Random: a random sample or randomized experiment should be used to obtain the data.
+- Normal: the sampling distribution of $\bar{x}$ (the sample mean) needs to be approximately normal. This is true if our parent population is normal or if our sample is reasonably large ($n \ge 30$)
+- Independent: individual observations need to be independent. If sampling without replacement, our sample size shouldn't be more than $10\%$ of the population.
+
+##### random condition**  
+
+random samples give us unbiased data from a population. When we don't use random selection, the resulting data usually has some form of bias, so using it to infer something about the population can be risky. 
+
+More specifically, sample means are unbiased estimators of their population mean. This will not necessarily happen if we use a non-random sample.
+
+##### **the normal condition**
+
+The sampling distribution of $\bar{x}$ (a sample mean) is approximately normal in a few different cases. The shape of the sampling distribution of $\bar{x}$ mostly depends on the shape of the parent population and the sample size n.
+
+- case 1: **parent population is normally distributed** if the parent population is normally distributed then the sampling distribution of $\bar{x}$ is approximately normal regardless of sample size. So if we know that the parent population is normally distributed, we pass this condition even if the sample size is small. In practice, however, we usually don't know if the parent population is normally distributed.
+- case 2: not normal or unknown parent population sample size is large $(n \ge 30)$ The sampling distributeion of $\bar{x}$ is approximately normal as long as the sample size is reasonably large. Because of the central limit theorem, when $n \ge 30$, we can treat the sampling distribution of $\bar{x}$ as approximately normal regardless of the shape of the parent population. There are a few rare cases where the parent population has such an unusual shape that the sampling distribution of the sample mean $\bar{x}$ isn't quire normal for sample sizes near 30. These cases are rate, so in practice, we are usually safe to assume approximately normality in the sampling distribution when $n \ge 30$.
+- case 3: not normal or unknown parent population; sample size is small $(n \lt 30)$ as long as the parent population does not have outliers or strong skew, even smaller samples will produce a sampling distribution of $\bar{x}$ that is approximately normal. In practice, we can't usually see the shape of the parent population but we can infer the shape based on the distribution of data in the sample. I fthe data in the sample shows skew or outliers, we should doubt that the parent is approximately normal, and so the smapling distribution of $\bar{x}$ may not be normal either. Bit if the sample data are roughly symmetric and don't show outliers or strong skew, we can assume that the sampling distribution of $\bar{x}$ will be approximately normal. The big idea is that we need to graph our sample data when $n \lt 30$ and then make a decision about the normal condition based on the appearance of the sample data.
+
+#### **The independence condition** 
+
+to use the formula for standard deviation of $\bar{x}$, we need individual observations to be independent. In an experiment, good design usually takes care of independence between subjects (control, different treatments, randomization)
+
+In an observational study that involves sampling wihtout replacement. Individual observations aren't technically independent snce removing each observation changes the population. However the 10\% condition says that if we smaple 10\% or less of the population, we can treat individual observations as independent since removing each observation doesn't change the population all that much as we sample. For instance, if our sample size is $n = 30$, there should be at least $N=300$ members in the population for the sample to meet the independence condidtion.
+
+Assuming independence between observations allows us to use this formula for standard deviation of $\bar{x}$ when we are making confidence intervals or doing significance tests:
+
+- $\sigma_{\bar{x}} = \frac{\sigma}{\sqrt{n}}$
+
+We usually don't know the populaton standard deviation $\sigma$, so we substitute the sample standard deviation $s_x$ as an estimate of $\sigma$. When we do this, we call it the **standard error** or $\bar{x}$ to distinguish it from the standard deviation.
+
+So our formula for standard error of $\bar{x}$ is:
+
+- $\sigma_{\bar{x}} = \frac{s_x}{\sqrt{n}}$
+
+#### **Summary**
+
+- If all three of these conditions are met, then we can we feel good about using ttt distributions to make a confidence interval or do a significance test. Satisfying these conditions makes our calculations accurate and conclusions reliable.
+- The random condition is perhaps the most important. If we break the random condition, there is probably bias in the data. The only reliable way to correct for a biased sample is to recollect the data in an unbiased way.
+The other two conditions are important, but if we don't meet the normal or independence conditions, we may not need to start over. For example, there is a way to correct for the lack of independence when we sample more than 10, percent of a population, but it's beyond the scope of what we're learning right now.
+- The main idea is that it's important to verify certain conditions are met before we make these confidence intervals or do these significance tests.
+
+#### Confidence interval for Mean
+
+$\bar{x} \pm t(\frac{s_x}{\sqrt{n}})$
+
+t-table requires degrees of freedom which is number of samples minus 1.
+
+#### Interpreting a confidence interval for a mean
+
+After we build a confidence interval for a mean, it's important to be able to interpret what the interval tells us about the population and what it doesn't tell us.
+
+A confidence interval for a mean gives us a range of plausible values for the population mean. If a confidence interval does not include a particular value, we can say that it is not likely that the particular value is the true population mean. However, even if a particular value is within the interval, we shouldn't conclude that the population mean equals that specific value.
+
+#### Sample size for a given margin of error for a mean
+
+Approximate sample size required to obtain a desired margin of error:
+
+Traditional:
+
+- $\bar{x} \pm t(\frac{S_x}{\sqrt{n}})$
+- for t need to know degrees of freedom, also don't know sample standard deviation
+
+Use estimation for population standard deviation:
+
+- $\bar{x} \pm z(\frac{\sigma}{\sqrt{n}})$
 
 ### Chebyshev's inequality
 
@@ -806,9 +912,172 @@ $\theta \in (T - \sigma_T, T + \sigma_T)$ with probability of $75\%$
 
 **confidence interval** only involves an unbiased estimator and knowlege of the standard deviation
 
+#### Making a t-interval for paired data
+
+With paired data, we're typically interested in the difference between each pair—for example, the difference between the pre-test and the post-test data, or the difference between the medicine and the placebo data.
+
+If certain conditions are met, we can construct a ttt interval to estimating the mean of these differences and draw conclusions.
+
+Key idea: when dealing with paired data, we're most interested in the distribution of the difference.
+
+#### Formula for test statistic
+
+$z = \frac{statistic - parameter}{standard\  deviation\ of\ statistic}$
+
+- $\frac{\hat{p} - p_0}{\sqrt{\frac{p_0(1-p_0)}{n}}}$
+- $\hat{p}$ is the sample proportion, the parameter $p_0$ is the proportion from the null hypothesis and n is the sample size.
+
 #### General Definition
 
 Example definition:
 
 $(t - c\sigma_T, t + c\sigma_T)$
 
+## Significant Tests
+
+### The idea of significance tests
+
+- Null Hypothesis: things are as we expected.
+- Alternative Hypothesis: what we are suspecting or trying to prove.
+
+**significance level** denoted by $\alpha$. Take a sample of people visiting the sight. Then we calculate the probability of getting the statistics for the sample
+
+- Take sample from population. sample mean and standard deviation
+- p-value: probability of achieving the mean given that the null hypothesis is true
+- if p-value is less than $\alpha$ then we reject the null hypothesis. Probability of getting sample statistics given then null hypothesis is true.
+
+#### Significance Levels
+
+**significance levels** threshold by which compared against the p-value. Important to set significance level ahead of time.
+
+**p-value** assuming that the null hypothesis is true what is the likelihood of getting the samples you got.
+
+We use p-values to make conclusions in significance testing. More specifically, we compare the p-value to a significance level $\alpha$ to make conclusions about our hypotheses.
+
+If the p-value is lower than the significance level whe chose, then we reject the null hypothesis $H_0$ in favor of the alternative hypothesis $H_a$. If the p-value is greater than or equal to the significance level, then we fail to reject the null hypothesis $H_0$ this doesn't mean we accept $H_0$
+
+- p-value $\lt \alpha$ ⇒reject $H_0$ ​⇒ accept $H_a$
+- p-value $\ge \alpha$ ⇒ fail to reject $H_0$
+
+- In practice, we should make our hypotheses and set our significance level before we collect or see any data.
+
+#### Type I errors and Type II errors
+
+
+Action | Reality $H_0$ true | $H_0$ False
+---------|----------|--------------------
+Reject $H_0$ | Type I Error | Correct Conclusion
+Fail to Reject $H_0$ | Correct Conclusion | Type II Error
+
+##### Power in Significance Test
+
+**Power** probability of rejecting the Null hypothesis when the null hypothesis is false
+
+- Power = P(rejecting H_0 | H_0 false)
+- 1 - P(not rejecting H_0 | H_0 false)
+
+
+How to Increase power
+
+- increase $\alpha$
+- increase n (increasing n is always a good thing)
+- Less variability will increase power but not under your control
+- If true parameter farther away will help but not under your control
+
+NOTE: increase $\alpha$ increases the probability of a type I error. Can make a tradeoff.
+
+##### Consequences of errors and significance
+
+Changing $\alpha$ impacts probabilities of Type I and Type II errors. In some tests, one kind of error has more serious consequences than the other.
+
+Type I error is when we reject a true null hypothesis. Lower values of $\alpha$ make it harder to reject a null hypothesis, so choosing lower values for $\alpha$ can reduce the probability of a Type I error. The consequence here is that if null hypothesis is false, it may be more difficult to reject using a lower value for $\alpha$. So using lower values of $\alpha$ can increase the probability of a Type II error.
+
+A type II error is when we fail to reject a false null hypothesis. Higher values of $\alpha$ make it easier to reject the null hypothesis, so choosing higher values for $\alpha$ can reduce the probability of a Type II error. The consequence here is that if the null hypothesis is ture, increasing $\alpha$ makes it more likely than we commit Type I error (rejecting a true null hypothesis)
+
+#### Testing hypothesis about a proportion
+
+The conditions for inference on a proportion:
+
+- Random: the data needs to come from a random sample or randomized experiment.
+- Normal: the sampling distribution $\hat{p}$ needs to be approximately normal
+  - needs at least 10 expected successes and 10 expected failures
+- independent: individual observationsaneeed to be independent. If sampling without replacement, our sample size shouldn't be more than 10\% of the population.
+
+##### The random condition
+
+Random samples give us unbiased data from a population. When samples aren't randomly selected, the data usually has some form of bias, so using data that wasn't randomly selected to make inferences about its population can be risky.
+
+More specifically, sample proportions are unbiased estimators of their population proportion. For example, if we have a bag of candy where 50 percent of the candies are orange and we take random samples from the bag, some will have more than 50percent orange and some will have less. But on average, the proportion of orange candies in each sample will equal \%50 percent. We write this property as $\mu_{\hat p}=p$, which holds true as long as our sample is random.
+
+This won't necessarily happen if our sample isn't randomly selected though. Biased samples lead to inaccurate results, so they shouldn't be used to create confidence intervals or carry out significance tests.
+
+##### The Normal Condition
+
+The sampling distribution of $\hat{p}$ is approximately normal as long as the expected number of successes and failures are both at least 10. This happens when our sample size n is reasonably large. The proof of this is beyond the scope of AP statistics, but our tutorial on sampling distributions can provide some intuition and verification that this condition indeed works.
+So we need:
+
+- expected successes $np ge 10$
+- expected failures: $n(1−p)\ge 10$
+​	
+If we are building a confidence interval, we don't have a value of p to plug in, so we instead count the observed number of successes and failures in the sample data to make sure they are both at least 10. If we are doing a significance test, we use our sample size n and the hypothesized value of p to calculate our expected numbers of successes and failures.
+
+##### The independence condition
+
+To use the formula for standard deviation of $\hat{p}$
+, we need individual observations to be independent. When we are sampling without replacement, individual observations aren't technically independent since removing each item changes the population.
+
+But the 10\%, percent condition says that if we sample 10\%, percent or less of the population, we can treat individual observations as independent since removing each observation doesn't significantly change the population as we sample. For instance, if our sample size is $n=150$ there should be at least $N=1500$,  1500 members in the population. This allows us to use the formula for standard deviation of $\hat{p}$
+
+- $\sigma_{\hat p}=\sqrt{\frac{p(1-p)}{n}}$
+
+In a significance test, we use the sample size n and the hypothesized value of p.
+
+If we are building a confidence interval for p, we don't actually know what p is, so we substitute $\hat{p}$ as an estimate for ppp. When we do this, we call it the standard error of $\hat{p}$ to distinguish it from the standard deviation. So our formula for standard error of $\hat{p}$ is
+
+- $\sigma_{\hat p}\approx\sqrt{\dfrac{\hat p(1-\hat p)}{n}}$
+
+##### Calculating a z-statistic in a test about proportion
+
+  $z = \frac{\hat{p} - p_0}{ \sqrt{\frac{p_0(1-p_0)}{n}}}$
+
+#### Condition for t test about a mean
+
+- Random: sample has be be randomly chosen from population
+  - Random samples give us unbiased data from a population. When we don't use random selection, the resulting data usually has some form of bias, so using it to infer something about the population can be risky.
+
+- Normal:
+  - parent population normal
+  - $n \ge 30$
+  - sample symmetric, no outliers. The big idea is that we need to graph our sample data when $n \lt 30$ and then make a decision about the normal condition based on the appearance of the sample data.
+
+- Independence: 
+  - sample with replacement
+  - number of samples $n \le 10\%$ 
+  - Assuming independence between observations allows us to use the following formula for standard deviation of $\bar{x}$:
+    - $\sigma_{bar{x} = \frac{\sigma}{\sqrt{n}}}$
+  - we don't kno wthe population standard deviation $\sigma$ so we substitute the sample standard deviation $s_x$ as an estimator for $sigma$. When we do this we call it the standard error of $\bar{x}$ to distinguish it from the the standard deviation.
+    - $\sigma_{\bar{x}} \approx \frac{s_x}{\sqrt{n}}$
+  
+The most important condition is the Random condition. The other two conditions are important but there are ways to correct for the other shortcomings.
+
+#### When to use the z or t statistic in significance tests
+
+Proportion
+
+- $H_0: p = p_1$
+- $H_a: p \ne p_1$
+- calculate the sample proportion $\hat{p}$
+  - find an associated z value for the associated with the sample proportion
+  - $z = \frac{\hat{p}-p_0}{\sigma_{\hat{p}}}$
+  - $\sigma_{\hat{p}} = \sqrt{\frac{p_0(1-p_0)}{n}}$
+
+Means
+
+- $H_0: \mu = \mu_1$
+- $H_a: \mu \ne \mu_1$
+- calculate $\bar{x}$
+- $z = \frac{\bar{x}-\mu_0}{\sigma_{\bar{x}}}$
+- $\frac{\sigma}{\sqrt{n}}$ 
+- $\sigma_{\bar{x}} = \frac{\sigma}{\sqrt{n}}$
+  - Difficult to know sigma for population therefore use t-statistic
+  - $t = \frac{\bar{x}-\mu_0}{\frac{s_x}{\sqrt{n}}}$
