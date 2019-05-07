@@ -82,6 +82,15 @@
         - [Calculating a z-statistic in a test about proportion](#calculating-a-z-statistic-in-a-test-about-proportion)
       - [Condition for t test about a mean](#condition-for-t-test-about-a-mean)
       - [When to use the z or t statistic in significance tests](#when-to-use-the-z-or-t-statistic-in-significance-tests)
+    - [Comparing Two Populations](#comparing-two-populations)
+      - [Confidence intervals for difference between two proportions](#confidence-intervals-for-difference-between-two-proportions)
+    - [P-value in a two-sample z test for difference of proportions](#p-value-in-a-two-sample-z-test-for-difference-of-proportions)
+    - [Confidence Interval for Difference Between Two Means](#confidence-interval-for-difference-between-two-means)
+      - [Formula for the test statistic](#formula-for-the-test-statistic)
+      - [Hypotheses for two-sample t-test](#hypotheses-for-two-sample-t-test)
+    - [Making conclusions about the difference of means](#making-conclusions-about-the-difference-of-means)
+      - [Reject vs. fail to reject $H_0$](#reject-vs-fail-to-reject-h0)
+      - [Using a confidence interval to test a difference](#using-a-confidence-interval-to-test-a-difference)
 
 ## Displaying and describing quantitative data
 
@@ -1081,3 +1090,94 @@ Means
 - $\sigma_{\bar{x}} = \frac{\sigma}{\sqrt{n}}$
   - Difficult to know sigma for population therefore use t-statistic
   - $t = \frac{\bar{x}-\mu_0}{\frac{s_x}{\sqrt{n}}}$
+
+### Comparing Two Populations
+
+#### Confidence intervals for difference between two proportions
+
+
+
+Ensure the following from the samples of each population:
+
+1. Make sure that the samples can be used for inference
+  - Random
+  - Normal
+    - $n\hat{p} \ge 10$ and $n(1-\hat{p} \ge 10$
+2. **confidence level** 
+  - $z^*\sqrt{\frac{p(1-p)}{n}}$
+
+3. **confidence interval** 
+  - $\sqrt{\frac{\hat{p}(1-\hat{p})}{n}}$
+
+Calculate the confidence interval for $p_1 - p_2$
+
+- $confidence\ interval\ for p_1 - p_2 = (\hat{p}_1 - \hat{p}_2) \pm z^*\sigma_{\hat{p}_1 - \hat{p}_2}$
+- $\sigma_{\hat{p}_1 - \hat{p}_2} \approx \sqrt{\frac{\hat{p}_1(1-\hat{p}_1)}{n_1} + \frac{\hat{p}_2(1-\hat{p}_2)}{n_2}}$
+
+### P-value in a two-sample z test for difference of proportions
+
+Calculate the test statistic
+
+The pooled combined proportion of successes in two samples:
+
+$\hat{p}_c = \frac{combined\ count \ of\ success}{combined\ sample\ sizes}$
+
+The test statistic for the test is:
+
+$z = \frac{sample\ difference - hypothesized\ differencl}{standard\ error\ of\ the\ difference}$
+
+This is equal to:
+
+$= \frac{(\hat{p}_1 - \hat{p}_2) - 0}{\sqrt{\frac{\hat{p}_c(1-\hat{p_c})}{n_1} + \frac{\hat{p}_c(1-\hat{p_c})}{n_2}}}$
+
+Then you can look up the appropriate p-value from a z-score table
+
+
+### Confidence Interval for Difference Between Two Means
+
+How to construct a confidence interfal for the difference in sample means.
+
+Need to use T-statistic because it does a better job of estimating the confidence interval when using an estimate for the standard deviation of the populations.
+
+- $(\bar{x}_1 - \bar{x}_2) \pm t^*\sqrt{\frac{s_1^2}{n_1} + \frac{s_2^2}{n_2}}$
+
+For calculating degrees of freedom use min($n_1$,$n_2$) - 1
+
+#### Formula for the test statistic
+
+$t = \frac{sample\ difference - hypothesis\ difference}{standard\ error\ of\ the\ difference}$
+
+$=\frac{(\bar{x}_1 - \bar{x}_2) - (\mu_1 - \mu_2)}{\sqrt{\frac{s_1^2}{n_1}} + \frac{s_2^2}{n_2}}$
+
+- The difference between $\mu_1 - \mu_2$ comes from the null hypothesis. In this type of test, we assume no difference in population means, so we can substitute 0 for $\mu_1 - \mu_2$
+- $s_1$ and $s_2$ are the two sample standard deviations
+- $n_1$ and $n_2$ are the two sample sizes
+
+
+#### Hypotheses for two-sample t-test
+
+Difference between paired t-test and a two-sample t-test. For a paired t-test doing tests on a single population. For each sample take two measurements. Do this for each member of the sample.
+
+Two-sample t-test. Talking about two different populations. For example, thinking between population of men and population of women. Finding difference of mean of two populations.
+
+NOTE: to do inference must meet the criteria:
+
+- Independence
+- Normal
+- Random
+
+### Making conclusions about the difference of means
+
+#### Reject vs. fail to reject $H_0$
+
+- P-value $\lt \alpha \rightarrow$ reject $H_0 \rightarrow$ accept $H_0$
+- P-value $\ge \alpha \rightarrow$ fail to reject $H_0 \rightarrow$ cannot accept $H_a$
+
+In this type of test, the null hypothesis ($H_0$) is that the two means are equal for there is no difference between the means).
+
+#### Using a confidence interval to test a difference
+
+In a two sided test, the null hypothesis says there is no difference between the two means. In other words, the null hypothesis says that the difference between the two means is 0. We can use a confidence interval instead of a P-value for two sisded tests as long as the confidence level and significance level add up to 100%.
+
+- interval excludes 0 $\rightarrow$ reject $H_0$ $\rightarrow$ accept $H_0$
+- interval contains 0 $\rightarrow$ fail to reject $H_0$ $\rightarrow$ cannot accept $H_a$
