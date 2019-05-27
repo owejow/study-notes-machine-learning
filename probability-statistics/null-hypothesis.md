@@ -83,14 +83,29 @@
       - [Condition for t test about a mean](#condition-for-t-test-about-a-mean)
       - [When to use the z or t statistic in significance tests](#when-to-use-the-z-or-t-statistic-in-significance-tests)
     - [Comparing Two Populations](#comparing-two-populations)
-      - [Confidence intervals for difference between two proportions](#confidence-intervals-for-difference-between-two-proportions)
+      - [Conditions Inference on two means](#conditions-inference-on-two-means)
+      - [Writing hypotheses to test difference of means](#writing-hypotheses-to-test-difference-of-means)
     - [P-value in a two-sample z test for difference of proportions](#p-value-in-a-two-sample-z-test-for-difference-of-proportions)
+    - [P-value for the confidence interval difference of two proportions](#p-value-for-the-confidence-interval-difference-of-two-proportions)
     - [Confidence Interval for Difference Between Two Means](#confidence-interval-for-difference-between-two-means)
       - [Formula for the test statistic](#formula-for-the-test-statistic)
       - [Hypotheses for two-sample t-test](#hypotheses-for-two-sample-t-test)
     - [Making conclusions about the difference of means](#making-conclusions-about-the-difference-of-means)
       - [Reject vs. fail to reject $H_0$](#reject-vs-fail-to-reject-h0)
       - [Using a confidence interval to test a difference](#using-a-confidence-interval-to-test-a-difference)
+  - [Chi-Squared Tests for Categorical Data](#chi-squared-tests-for-categorical-data)
+    - [Chi-Squared Tests for Homogeneity](#chi-squared-tests-for-homogeneity)
+      - [Selecting Appropriate Hypothesis](#selecting-appropriate-hypothesis)
+      - [Separate, independent samples or groups](#separate-independent-samples-or-groups)
+      - [One sample or group](#one-sample-or-group)
+      - [using a P-value to make a conclusion](#using-a-p-value-to-make-a-conclusion)
+  - [Linear Regression](#linear-regression)
+    - [Conditions for inference](#conditions-for-inference)
+    - [Formula for t-interval estimating slope](#formula-for-t-interval-estimating-slope)
+    - [Test statistic Formula](#test-statistic-formula)
+    - [Reject vs. fail to reject $H_0$](#reject-vs-fail-to-reject-h0-1)
+    - [Transforming Non-linear data](#transforming-non-linear-data)
+  - [Appropriate Tests](#appropriate-tests)
 
 ## Displaying and describing quantitative data
 
@@ -663,6 +678,7 @@ Assuming $X$ and $Y$ are independent of eachother:
   - $Var(X + Y) = Var(X) + Var(Y)$
   - $Var(X + Y) = Var(X) + Var(Y)$
 
+- NOTE: the above formulation assumes that X and Y are independent random variables
 - **Variance** is defined as the average squared difference from the mean
 - **standard deviation** is the square root of the variance
 
@@ -1093,8 +1109,10 @@ Means
 
 ### Comparing Two Populations
 
-#### Confidence intervals for difference between two proportions
 
+#### Conditions Inference on two means
+
+#### Writing hypotheses to test difference of means
 
 
 Ensure the following from the samples of each population:
@@ -1105,14 +1123,24 @@ Ensure the following from the samples of each population:
     - $n\hat{p} \ge 10$ and $n(1-\hat{p} \ge 10$
 2. **confidence level** 
   - $z^*\sqrt{\frac{p(1-p)}{n}}$
+  - from a confidence level you calculate a critical value $z^*$ how many standard deviations above or below the mean of a normal distribution to the conficence level of a normal distribution
 
 3. **confidence interval** 
   - $\sqrt{\frac{\hat{p}(1-\hat{p})}{n}}$
+    - Estimate of the standard error use
+  - Could use $\sigma_{\hat{p}}$ sample standard deviation of sampling distribution of the sample proportions.
+    - confidence interval = $\hat{p} \pm \sigma_{\hat{p}}$
+      - The $\sigma_{\hat{p}}$ can be directly computed lif we knew the true population proportions.  Could directly calculate confidence level from the true proportionsj:
+        - confidence level =  $z^*\sqrt{\frac{p(1-p)}{n}}$
+        - \sigma_{\hat{p}}  = \sqrt{\frac{p(1-p)}{n}} $
+      - Calculate $\sigma_{\hat{p}} \approx \sqrt{\frac{\hat{p}(1-\hat{p})}{n}}$
 
 Calculate the confidence interval for $p_1 - p_2$
 
-- $confidence\ interval\ for p_1 - p_2 = (\hat{p}_1 - \hat{p}_2) \pm z^*\sigma_{\hat{p}_1 - \hat{p}_2}$
+- confidence\ interval for $p_1 - p_2 = (\hat{p}_1 - \hat{p}_2) \pm z^*\sigma_{\hat{p}_1 - \hat{p}_2}$
 - $\sigma_{\hat{p}_1 - \hat{p}_2} \approx \sqrt{\frac{\hat{p}_1(1-\hat{p}_1)}{n_1} + \frac{\hat{p}_2(1-\hat{p}_2)}{n_2}}$
+  - This is derived from the property for variances.
+  - Conditions for inference are exactly the same single mean proportion.
 
 ### P-value in a two-sample z test for difference of proportions
 
@@ -1132,12 +1160,20 @@ $= \frac{(\hat{p}_1 - \hat{p}_2) - 0}{\sqrt{\frac{\hat{p}_c(1-\hat{p_c})}{n_1} +
 
 Then you can look up the appropriate p-value from a z-score table
 
+### P-value for the confidence interval difference of two proportions
+
+- (sample difference) $\pm$ (critical value)(standard error of difference)
+- $\hat{p}_1 - \hat{p}_2 \pm z^* \sqrt{\frac{\hat{p_1}(1-\hat{p_1})}{n1} + \frac{\hat{p}_2 (1-\hat{p}_2)}{n_2}}$
+
+
 
 ### Confidence Interval for Difference Between Two Means
 
 How to construct a confidence interfal for the difference in sample means.
 
 Need to use T-statistic because it does a better job of estimating the confidence interval when using an estimate for the standard deviation of the populations.
+
+(sample difference) $\pm$ (critical value)(standard error of difference)
 
 - $(\bar{x}_1 - \bar{x}_2) \pm t^*\sqrt{\frac{s_1^2}{n_1} + \frac{s_2^2}{n_2}}$
 
@@ -1181,3 +1217,119 @@ In a two sided test, the null hypothesis says there is no difference between the
 
 - interval excludes 0 $\rightarrow$ reject $H_0$ $\rightarrow$ accept $H_0$
 - interval contains 0 $\rightarrow$ fail to reject $H_0$ $\rightarrow$ cannot accept $H_a$
+
+## Chi-Squared Tests for Categorical Data
+
+$\chi^2$ test determines likelihood of getting deltas between expected and actual of a certain number.
+
+Correct Choice | Expected Number | Actual Number
+---------|-----------------|----------------
+ A | 25 | 20
+ B | 25 | 20
+ C | 25 | 25
+ D | 25 | 35
+
+- $\chi^2 = \frac{(20-25)^2}{25} + \frac{(20-25)^2}{25} + \frac{(25-25)^2}{25} + \frac{(35-25)^2}{25} = 6$
+- Then we can look into the $\chi^2$ table to determine the probability of getting this distribution. The degrees of freedom is one less than the total number of variables .
+
+Conditions for $\chi^2$
+
+- Random sample
+- Expected number of counts should be at least equal to 5
+- Samples need to be independent. Sample size no more than 10 percent of population or sample with replacement.
+
+### Chi-Squared Tests for Homogeneity
+
+#### Selecting Appropriate Hypothesis
+
+The chi-square statistic is such a versatile tool that we can use the exact same calculations to answer very different questions with it, depending on whether we draw our data from one sample or from independent samples or groups.
+
+#### Separate, independent samples or groups
+
+A chi-square test can help us when we want to know whether different populations or groups are alike with regards to the distribution of a variable. Our hypotheses would look something like this:
+
+- $H_0$: The distribution of a variable is the same in each population or group.
+- $H_a$: The distribution of a variable differs between some of the populations or groups.
+
+We call this the chi-square test for homogeneity.
+
+#### One sample or group
+
+A chi-square test can help us see whether individuals from a sample who belong to a certain category are more likely than others in the sample to also belong to another category. Our hypotheses would look something like this:
+
+- $H_0$ There is no association between the two variables (they are independent).
+- $H_a$ There is an association between the two variables (they are not independent).
+
+We call this the chi-square test of association or independence.
+
+
+#### using a P-value to make a conclusion
+
+- P-value $\lt \alpha \rightarrow$ reject $H_0 \rightarrow$ accept $H_a$
+- P-value $\ge \alpha \rightarrow$ fail to rejectreject $H_0 \rightarrow$ cannot accept $H_a$
+
+## Linear Regression
+
+### Conditions for inference
+
+  1. Linear: actual linear relationship between x and y
+  2. Independence: Size of sample is no more than 10% or sample with replacement
+  3. Normal: for any given x that you would expect the distribution of y's is normal
+  4. Equal Variance: each of the spreads in y for a given x is given
+  5. Random
+  
+### Formula for t-interval estimating slope
+
+- (statistic) $\pm$ (critical value)(standard deviation of statistic)
+- $b \pm t^*_{n-2}(SE_b)$
+
+### Test statistic Formula
+
+The test statistic gives us an idea of how far away our sample result is from our null hypothesis. For a t-test about the slope, our test statistic is:
+
+- $t = \frac{statisic - parameter}{standard\ error\ of\ statistic}$
+- $\frac{b - \beta_0}{SE_b}$
+
+### Reject vs. fail to reject $H_0$
+
+- P-value $\lt \alpha \rightarrow$ reject $H_0 \rightarrow$ accept $H_a$
+- P-value $\ge \alpha \rightarrow$ fail to reject $H_0 \rightarrow$ cannot accept $H_a$
+
+### Transforming Non-linear data
+
+Can take log of response or other transform to make non-linear data look more linear.
+
+## Appropriate Tests
+
+- Two Sample Z-test for a proportion
+  - When comparing a single proportion between two groups.
+- A $\chi^2$ test of independence
+  - When categorizing customers from a single sample according to two variables.
+- A t-test for slope
+  - When assessing the slope of a regression line.
+  - Use this type of test to see if the slope between the variables is significantly different than 0.
+- $\chi^2$ test for homogeneity
+  - A chi-square test can help us when we want to know whether different populations or groups are alike with regards to the distribution of a variable. Our hypotheses would look something like this:
+    - $H_0$: The distribution of a variable is the same in each population or group.
+    - $H_a$: The distribution of a variable differs between some of the populations or groups.
+- $\chi^2$ goodness of fit
+  - When comparing observed counts of a variable (rarity level) to a hypothesized distribution.
+- paired t-test for the mean difference
+  - Need to calculate the difference between two values for each observation, and do a test on the mean of those differences.
+- z-test for a proportion
+  - When comparing the proportion fo a sample to the hypothesized value. Do not use two-sample procedures for this.
+- two sample z-test for difference of proportions
+  - When looking for difference in proportion of two samples
+- t-test for a mean
+  - When comparing the mean of a single sample to the hypothesized value. A two sample procedure is not appropriate here.
+- two-sample t-test for the difference of means
+  - When comparing means of two independent samples. 
+- z-interval for a proportion
+  - want to estimate the uncertainty for an interval so use this method.
+- t-interval for a mean
+  - estimate the mean
+- t-test one sample
+  - The test statistic gives us an idea of how far away our sample result is from our null hypothesis. For a one sample t test for a mean, our test statistic is:
+    - $t = \frac{statistic\ -\ parameter}{standard\ error\ of\ statistic}$
+    - $\frac{\bar{x} - \mu_0}{\frac{s_x}{\sqrt{n}}}$
+    - The statistic $\bar{x}$ is the sample mean, and the parameter $\mu_0$ is the mean from the null hypothesis. The standard error of the sample mean is $s_x$ (the sample standard deviation) divided by the square root of n (the sample size).
